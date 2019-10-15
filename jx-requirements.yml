@@ -1,34 +1,86 @@
 autoUpdate:
   enabled: true
-  schedule: '0 0 * * *'
+  schedule: 0 0 * * *
+bootConfigURL: https://github.com/cloudbees/arcalos-boot-config.git
 cluster:
-  clusterName: ""
-  environmentGitOwner: ""
-  project: ""
+  azure: {}
+  clusterName: howlersatin
+  environmentGitOwner: jenkins-x-bot-test
+  environmentGitPublic: true
+  externalDNSSAName: howlersatin-dn
+  gitKind: github
+  gitName: github
+  gitServer: https://github.com
+  kanikoSAName: howlersatin-ko
+  namespace: jx
+  project: aps-howlersatin
   provider: gke
-  zone: ""
-gitops: true
+  registry: gcr.io
+  vaultName: howlersatin
+  vaultSAName: howlersatin-vt
+  zone: us-east1-c
 environments:
-- key: dev
-- key: staging
-- key: production
+- ingress:
+    domain: ""
+    externalDNS: false
+    namespaceSubDomain: ""
+    tls:
+      email: ""
+      enabled: false
+      production: false
+  key: dev
+- ingress:
+    domain: ""
+    externalDNS: false
+    namespaceSubDomain: ""
+    tls:
+      email: ""
+      enabled: false
+      production: false
+  key: staging
+- ingress:
+    domain: ""
+    externalDNS: false
+    namespaceSubDomain: ""
+    tls:
+      email: ""
+      enabled: false
+      production: false
+  key: production
+gitops: true
 ingress:
-  domain: ""
-  externalDNS: false
+  cloud_dns_secret_name: external-dns-gcp-sa
+  domain: aps-howlersatin.jxaas.io
+  domainIssuerURL: https://jx-tenant-service-jx-staging.jenkins-x.live
+  externalDNS: true
+  namespaceSubDomain: -jx.
   tls:
     email: jenkins-x@cloudbees.com
     enabled: true
-    production: false
+    production: true
 kaniko: true
 secretStorage: vault
 storage:
+  backup:
+    enabled: true
+    url: gs://aps-howlersatin-backup
   logs:
-    enabled: false
-    url: ""
+    enabled: true
+    url: gs://aps-howlersatin-lts
   reports:
     enabled: false
     url: ""
   repository:
     enabled: false
     url: ""
+vault:
+  bucket: aps-howlersatin-vault
+  key: howlersatin-crypto-key
+  keyring: howlersatin-keyring
+  name: howlersatin
+  serviceAccount: howlersatin-vt
+velero: {}
+versionStream:
+  ref: v0.0.24
+  url: https://github.com/cloudbees/arcalos-jenkins-x-versions.git
 webhook: prow

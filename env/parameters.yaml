@@ -1,0 +1,14 @@
+adminUser:
+  password: vault:howlersatin/adminUser:password
+  username: admin
+dashboardAuthID: vault:howlersatin:dashboardAuthID
+dashboardAuthOrg: arcalos-dashboard
+dashboardAuthSecret: vault:howlersatin:dashboardAuthSecret
+dashboardGrpchost: dex.jx
+enableDocker: false
+pipelineUser:
+  email: jenkins-x@googlegroups.com
+  token: vault:howlersatin/pipelineUser:token
+  username: jenkins-x-bot-test
+prow:
+  hmacToken: vault:howlersatin/prow:hmacToken
